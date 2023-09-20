@@ -8,7 +8,7 @@ import SongWriters from './songWriter.model';
 import SongPlays from './songPlays.model';
 
 class Song extends Model {
-  public id!: number;
+  public id: number;
 
   public name: string;
 

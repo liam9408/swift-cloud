@@ -38,6 +38,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cookie-parser": "^1.4.6",
+    "csv-parse": "^5.5.0",
     "dotenv": "^16.3.1",
     "eslint": "^8.49.0",
     "eslint-config-airbnb-base": "^15.0.0",
