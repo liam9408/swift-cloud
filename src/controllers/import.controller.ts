@@ -8,7 +8,7 @@ import { DefaultService } from '../services';
 import logger from '../utils/logger';
 
 @injectable()
-class DefaultController {
+class ImportController {
   public defaultService: DefaultService;
 
   constructor(
@@ -42,4 +42,4 @@ class DefaultController {
   };
 }
 
-export default DefaultController;
+export default ImportController;

@@ -9,6 +9,7 @@ import Artists from './artist.model';
 import SongArtists from './songArtist.model';
 import SongWriters from './songWriter.model';
 import SongPlays from './songPlays.model';
+import ApiLog from './apiLog.model';
 
 console.info('Initializing sequelize...');
 
@@ -50,6 +51,7 @@ export const initModels = async (sequelizeInst: Sequelize) => {
     await SongArtists.initModel(sequelizeInst);
     await SongWriters.initModel(sequelizeInst);
     await SongPlays.initModel(sequelizeInst);
+    await ApiLog.initModel(sequelizeInst);
   } catch (error) {
     console.log(error);
   }
