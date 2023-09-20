@@ -34,21 +34,21 @@ container
   .to(AlbumSongService);
 
 container
-  .bind<ArtistService>(SERVICE_IDENTIFIER.DEFAULT_SERVICE)
+  .bind<ArtistService>(SERVICE_IDENTIFIER.ARTIST_SERVICE)
   .to(ArtistService);
 
 container
-  .bind<SongArtistService>(SERVICE_IDENTIFIER.DEFAULT_SERVICE)
+  .bind<SongArtistService>(SERVICE_IDENTIFIER.SONG_ARTIST_SERVICE)
   .to(SongArtistService);
 
 container
-  .bind<SongPlayService>(SERVICE_IDENTIFIER.DEFAULT_SERVICE)
+  .bind<SongPlayService>(SERVICE_IDENTIFIER.SONG_PLAY_SERVICE)
   .to(SongPlayService);
 
-container.bind<SongService>(SERVICE_IDENTIFIER.DEFAULT_SERVICE).to(SongService);
+container.bind<SongService>(SERVICE_IDENTIFIER.SONG_SERVICE).to(SongService);
 
 container
-  .bind<SongWriterService>(SERVICE_IDENTIFIER.DEFAULT_SERVICE)
+  .bind<SongWriterService>(SERVICE_IDENTIFIER.SONG_WRITER_SERVICE)
   .to(SongWriterService);
 
 export default container;

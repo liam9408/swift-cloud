@@ -66,6 +66,7 @@ const validateSchema = (csvHeader: string[], schemaDef: Json) => {
       const { name } = fieldDef;
 
       if (!csvHeader.includes(name)) {
+        console.log(csvHeader, name);
         return false;
       }
     }

@@ -112,7 +112,6 @@ class TypeParser {
           break;
         case 'STRING':
           result = this.toString(val);
-          console.log(result);
           break;
         case 'BOOLEAN':
           result = this.toBool(val);
