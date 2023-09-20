@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import logger from '../utils/logger';
+import HttpException from '..//exceptions/HttpException';
 
 @injectable()
 class DefaultService {
@@ -16,7 +17,7 @@ class DefaultService {
         label: 'Default Service',
         message: err.stack,
       });
-      // throw new HttpException(500, 30001, 'Default');
+      throw new HttpException(500, 30001, 'Default');
     }
   }
 }
