@@ -1,6 +1,6 @@
 version: '3.9' # optional since v1.27.0
 services:
-  blog-backend:
+  swift-cloud:
     build:
       context: .
       dockerfile: Dockerfile

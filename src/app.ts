@@ -8,11 +8,11 @@ import { Route } from './types/routes.type';
 import errorMiddleware from './middlewares/error.middleware';
 // import corsMiddleware from './middlewares/cors.middleware';
 
-// import {
-//   sequelize,
-//   initModels,
-//   initAssociation,
-// } from './db/models/index.model';
+import {
+  sequelize,
+  initModels,
+  initAssociation,
+} from './db/models/index.model';
 
 class App {
   public app: express.Application;
@@ -25,7 +25,7 @@ class App {
     this.app = express();
     this.port = process.env.PORT || 3000;
 
-    // App.initializeSequelize();
+    App.initializeSequelize();
 
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
@@ -37,7 +37,7 @@ class App {
       this.app.listen(this.port, async () => {
         console.log(`🚀 App listening on the port ${this.port}`);
         try {
-          // await sequelize.authenticate();
+          await sequelize.authenticate();
           console.info(
             'Database Connection has been established successfully.'
           );
@@ -50,10 +50,10 @@ class App {
     }
   }
 
-  // public static async initializeSequelize() {
-  //   await initModels(sequelize);
-  //   await initAssociation();
-  // }
+  public static async initializeSequelize() {
+    await initModels(sequelize);
+    await initAssociation();
+  }
 
   public getServer() {
     return this.app;

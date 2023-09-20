@@ -9,4 +9,10 @@ const app = new App([
   // new AuthRoute()
 ]);
 
+console.log(
+  process.env.POSTGRES_DATABASE,
+  process.env.POSTGRES_USERNAME,
+  process.env.POSTGRES_PASSWORD
+);
+
 app.listen();
