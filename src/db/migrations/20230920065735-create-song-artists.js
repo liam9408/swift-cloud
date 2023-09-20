@@ -22,7 +22,11 @@ module.exports = {
           key: 'id',
         },
       },
-      feature: {
+      isFeatured: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      isMainArtist: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
