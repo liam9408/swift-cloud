@@ -129,6 +129,10 @@ class ImportController {
 
       // process associated data
       for (const [albumName, albumSongs] of Object.entries(groupedByAlbum)) {
+        const albumId = newAlbums.find(
+          (newAlbum) => albumName === newAlbum.name
+        ).id;
+
         albumSongs.forEach((song) => {
           const songInDb = newSongs.find(
             (newSong) => song.song === newSong.name
@@ -136,8 +140,7 @@ class ImportController {
 
           // get album for each song
           const albumSongToCreate = {
-            albumId: newAlbums.find((newAlbum) => albumName === newAlbum.name)
-              .id,
+            albumId,
             songId: songInDb.id,
           };
           albumSongsToCreate.push(albumSongToCreate);
@@ -191,29 +194,9 @@ class ImportController {
         createSongPlay,
       ]);
 
-      // for (const [albumName, albumSongs] of Object.entries(groupedByAlbum)) {
-      //   const albumToCreate = {
-      //     name: albumName,
-      //     year: albumSongs[0].year,
-      //     createdAt: new Date(),
-      //     updatedAt: new Date(),
-      //   };
-      //   albumsToCreate.push(albumToCreate);
-      // }
-
-      /**
-       * create albums
-       * create artists, turn into key value pairs
-       * create songs
-       * create song albums
-       * create song artists
-       * create song writers
-       * create song plays
-       */
       res.json({
         success: true,
-        data: songPlaysToCreate,
-        // songsList
+        data: songsList,
       });
     } catch (error) {
       logger.log({
