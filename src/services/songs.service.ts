@@ -34,6 +34,7 @@ class SongService {
       });
       return resp.map((row) => row.toJSON() as Song);
     } catch (err) {
+      console.log(err);
       logger.log({
         level: 'error',
         label: 'Song Service',

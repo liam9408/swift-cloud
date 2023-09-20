@@ -1,6 +1,6 @@
-export interface AlbumSong {
+export interface SongWriter {
   id?: number;
-  album?: number;
+  artistId?: number;
   songId?: number;
   createdAt?: Date;
   updatedAt?: Date;

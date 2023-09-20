@@ -1,19 +1,19 @@
 import { injectable } from 'inversify';
 import logger from '../utils/logger';
 import HttpException from '../exceptions/HttpException';
-import ArtistModel from '../db/models/artist.model';
+import AlbumSongModel from '../db/models/albumSong.model';
 import { Transaction } from 'sequelize';
 
 @injectable()
 class AlbumSongsService {
-  public artistModel = ArtistModel;
+  public albumSongModel = AlbumSongModel;
 
   public async batchCreate(
     dataToCreate: any[],
     transaction?: Transaction
   ): Promise<Boolean> {
     try {
-      await this.artistModel.bulkCreate(dataToCreate, { transaction });
+      await this.albumSongModel.bulkCreate(dataToCreate, { transaction });
       return true;
     } catch (err) {
       logger.log({

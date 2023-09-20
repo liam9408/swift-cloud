@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 import logger from '../utils/logger';
 import HttpException from '../exceptions/HttpException';
 import SongPlays from '../db/models/songPlays.model';
-import { SongPlay } from '../types/SongPlay.type';
+import { SongPlay } from '../types/songPlay.type';
 import { FindOptions, Transaction } from 'sequelize';
 
 @injectable()

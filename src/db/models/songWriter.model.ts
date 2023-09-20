@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 import Songs from './song.model';
-import Albums from './album.model';
+import Artists from './artist.model';
 
 class SongWriter extends Model {
   public id!: number;
@@ -47,7 +47,7 @@ class SongWriter extends Model {
 
   public static initAssociation(): void {
     this.belongsTo(Songs);
-    this.belongsTo(Albums);
+    this.belongsTo(Artists);
   }
 }
 

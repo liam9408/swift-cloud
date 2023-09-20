@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 import Songs from './song.model';
-import Albums from './album.model';
+import Artists from './artist.model';
 
 class SongArtist extends Model {
   public id!: number;
@@ -9,7 +9,9 @@ class SongArtist extends Model {
 
   public artistId: number;
 
-  public feature: true;
+  public isFeatured: boolean;
+
+  public isMainArtist: boolean;
 
   public readonly createdAt!: Date;
 
@@ -39,9 +41,13 @@ class SongArtist extends Model {
             key: 'id',
           },
         },
-        feature: {
+        isFeatured: {
           type: DataTypes.BOOLEAN,
           defaultValue: false,
+        },
+        isMainArtist: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: true,
         },
       },
       {
@@ -53,7 +59,7 @@ class SongArtist extends Model {
 
   public static initAssociation(): void {
     this.belongsTo(Songs);
-    this.belongsTo(Albums);
+    this.belongsTo(Artists);
   }
 }
 

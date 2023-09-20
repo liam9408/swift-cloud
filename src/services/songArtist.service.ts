@@ -16,6 +16,7 @@ class SongArtistService {
       await this.songArtist.bulkCreate(dataToCreate, { transaction });
       return true;
     } catch (err) {
+      console.log(err);
       logger.log({
         level: 'error',
         label: 'SongArtist Service',
