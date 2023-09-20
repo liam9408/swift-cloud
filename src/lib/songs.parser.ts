@@ -65,15 +65,15 @@ class SongsParser {
       const plays = [
         {
           month: convertToYearMonth('playsJune'),
-          playCount: Number(song.playInJune),
+          playCount: Number(song.playsJune),
         },
         {
           month: convertToYearMonth('playsJuly'),
-          playCount: Number(song.playInJuly),
+          playCount: Number(song.playsJuly),
         },
         {
           month: convertToYearMonth('playsAugust'),
-          playCount: Number(song.playInAugust),
+          playCount: Number(song.playsAugust),
         },
       ];
 

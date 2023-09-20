@@ -182,7 +182,7 @@ class ImportController {
       const createSongWriter =
         this.songWriterService.batchCreate(songWritersToCreate);
       const createSongPlay =
-        this.albumSongService.batchCreate(albumSongsToCreate);
+        this.songPlayService.batchCreate(songPlaysToCreate);
 
       const [] = await Promise.all([
         createAlbumSong,
@@ -212,7 +212,7 @@ class ImportController {
        */
       res.json({
         success: true,
-        data: { songWritersToCreate, songArtistsToCreate },
+        data: songPlaysToCreate,
         // songsList
       });
     } catch (error) {
