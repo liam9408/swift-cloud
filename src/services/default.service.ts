@@ -1,15 +1,16 @@
 import { injectable } from 'inversify';
 import logger from '../utils/logger';
-import HttpException from '..//exceptions/HttpException';
+import HttpException from '../exceptions/HttpException';
 
 @injectable()
 class DefaultService {
-  // public userModel = UserModel;
+  public userModel = {};
 
   // connect db table
   public async testDatabase(): Promise<Boolean> {
     try {
       // await this.userModel.findAll();
+      console.log(this.userModel);
       return true;
     } catch (err) {
       logger.log({

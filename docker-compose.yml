@@ -1,0 +1,19 @@
+version: '3.9' # optional since v1.27.0
+services:
+  blog-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: swift-cloud
+    command: sh -c "npm run watch"
+    working_dir: /usr/src/app
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app:cached
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+
+volumes:
+  node_modules:
