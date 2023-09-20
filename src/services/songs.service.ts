@@ -9,12 +9,9 @@ import { FindOptions, Transaction } from 'sequelize';
 class SongService {
   public songModel = SongModel;
 
-  public async findAll(
-    query: FindOptions[],
-    transaction: Transaction
-  ): Promise<Song[]> {
+  public async findAll(query: FindOptions[]): Promise<Song[]> {
     try {
-      const resp = await this.songModel.findAll(...query, { transaction });
+      const resp = await this.songModel.findAll(...query);
       return resp.map((row) => row.toJSON() as Song);
     } catch (err) {
       logger.log({
@@ -29,11 +26,13 @@ class SongService {
   // connect db table
   public async batchCreate(
     dataToCreate: any[],
-    transaction: Transaction
-  ): Promise<Boolean> {
+    transaction?: Transaction
+  ): Promise<Song[]> {
     try {
-      await this.songModel.bulkCreate(dataToCreate, { transaction });
-      return true;
+      const resp = await this.songModel.bulkCreate(dataToCreate, {
+        transaction,
+      });
+      return resp.map((row) => row.toJSON() as Song);
     } catch (err) {
       logger.log({
         level: 'error',

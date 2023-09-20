@@ -2,20 +2,17 @@ import { injectable } from 'inversify';
 import logger from '../utils/logger';
 import HttpException from '../exceptions/HttpException';
 import SongPlays from '../db/models/songPlays.model';
-import { Artist } from '../types/artist.type';
+import { SongPlay } from '../types/SongPlay.type';
 import { FindOptions, Transaction } from 'sequelize';
 
 @injectable()
 class SongPlayService {
   public songPlays = SongPlays;
 
-  public async findAll(
-    query: FindOptions[],
-    transaction: Transaction
-  ): Promise<Artist[]> {
+  public async findAll(query: FindOptions[]): Promise<SongPlay[]> {
     try {
-      const resp = await this.songPlays.findAll(...query, { transaction });
-      return resp.map((row) => row.toJSON() as Artist);
+      const resp = await this.songPlays.findAll(...query);
+      return resp.map((row) => row.toJSON() as SongPlay);
     } catch (err) {
       logger.log({
         level: 'error',
@@ -28,11 +25,13 @@ class SongPlayService {
 
   public async batchCreate(
     dataToCreate: any[],
-    transaction: Transaction
-  ): Promise<Boolean> {
+    transaction?: Transaction
+  ): Promise<SongPlay[]> {
     try {
-      await this.songPlays.bulkCreate(dataToCreate, { transaction });
-      return true;
+      const resp = await this.songPlays.bulkCreate(dataToCreate, {
+        transaction,
+      });
+      return resp.map((row) => row.toJSON() as SongPlay);
     } catch (err) {
       logger.log({
         level: 'error',

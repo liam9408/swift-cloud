@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import logger from '../utils/logger';
 import HttpException from '../exceptions/HttpException';
 import SongWriter from '../db/models/songWriter.model';
+
 import { Transaction } from 'sequelize';
 
 @injectable()
@@ -10,10 +11,12 @@ class SongWriterService {
 
   public async batchCreate(
     dataToCreate: any[],
-    transaction: Transaction
+    transaction?: Transaction
   ): Promise<Boolean> {
     try {
-      await this.songWriter.bulkCreate(dataToCreate, { transaction });
+      await this.songWriter.bulkCreate(dataToCreate, {
+        transaction,
+      });
       return true;
     } catch (err) {
       logger.log({

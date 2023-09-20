@@ -10,7 +10,7 @@ class SongArtistService {
 
   public async batchCreate(
     dataToCreate: any[],
-    transaction: Transaction
+    transaction?: Transaction
   ): Promise<Boolean> {
     try {
       await this.songArtist.bulkCreate(dataToCreate, { transaction });

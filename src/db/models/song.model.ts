@@ -1,4 +1,5 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+import { values as getValues } from 'lodash';
 
 import Albums from './album.model';
 import AlbumSongs from './albumSong.model';
@@ -7,10 +8,16 @@ import SongArtists from './songArtist.model';
 import SongWriters from './songWriter.model';
 import SongPlays from './songPlays.model';
 
+import { SONGS } from '../../enums';
+
 class Song extends Model {
   public id: number;
 
   public name: string;
+
+  public type: Enumerator;
+
+  public live: boolean;
 
   public readonly createdAt!: Date;
 
@@ -26,6 +33,15 @@ class Song extends Model {
         },
         name: {
           type: DataTypes.STRING(255),
+        },
+        type: {
+          type: DataTypes.ENUM,
+          values: getValues(SONGS.type),
+          defaultValue: SONGS.type.ORIGINAL,
+        },
+        live: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
         },
       },
       {
