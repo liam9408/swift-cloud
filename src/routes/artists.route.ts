@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { Route } from '../types/routes.type';
-import { SongsController } from '../controllers';
+import { ArtistController } from '../controllers';
 
 class DefaultRoute implements Route {
-  public path = '/api/songs';
+  public path = '/api/artists';
 
   public router = Router();
 
-  public songsController = new SongsController();
+  public artistController = new ArtistController();
 
   constructor() {
     this.initializeRoutes();
@@ -16,8 +16,8 @@ class DefaultRoute implements Route {
   private initializeRoutes() {
     this.router.get(
       `${this.path}`,
-      // todo: authMiddleware goes here
-      this.songsController.listSongs
+      // todo: auth middleware goes here
+      this.artistController.listArtists
     );
   }
 }
