@@ -9,6 +9,26 @@ import { FindOptions, Transaction } from 'sequelize';
 class SongService {
   public songModel = SongModel;
 
+  public async findAndCountAll(
+    query?: FindOptions
+  ): Promise<{ rows: Song[]; count: number }> {
+    try {
+      const records = await this.songModel.findAndCountAll(query);
+      return {
+        ...records,
+        count: records.count,
+        rows: records.rows.map((row: any) => row.toJSON() as Song),
+      };
+    } catch (err) {
+      logger.log({
+        level: 'error',
+        label: 'Song Service',
+        message: err.stack,
+      });
+      throw new HttpException(500, 30006, err.message);
+    }
+  }
+
   public async findAll(query?: FindOptions): Promise<Song[]> {
     try {
       const resp = await this.songModel.findAll({

@@ -18,7 +18,6 @@ class DefaultRoute implements Route {
     this.router.get(
       `${this.path}`,
       apiLoggerMiddleware('listArtists'),
-      // todo: auth middleware goes here
       this.artistController.listArtists
     );
   }

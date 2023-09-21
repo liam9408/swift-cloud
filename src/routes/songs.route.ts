@@ -22,8 +22,6 @@ class DefaultRoute implements Route {
       this.songsController.listSongs
     );
 
-    this.router.get(`${this.path}`, this.songsController.listSongs);
-
     this.router.get(
       `${this.path}/popular/:month`,
       apiLoggerMiddleware('listSongs'),
@@ -32,25 +30,7 @@ class DefaultRoute implements Route {
 
     this.router.get(
       `${this.path}/:id`,
-      apiLoggerMiddleware('listSongs'),
-      this.songsController.listSongs
-    );
-
-    this.router.get(
-      `${this.path}/search/artist/:artistName`,
-      apiLoggerMiddleware('listSongs'),
-      this.songsController.listSongs
-    );
-
-    this.router.get(
-      `${this.path}/search`,
-      apiLoggerMiddleware('listSongs'),
-      this.songsController.listSongs
-    );
-
-    this.router.get(
-      `${this.path}/songs/top/:limit`,
-      apiLoggerMiddleware('listSongs'),
+      apiLoggerMiddleware('getSong'),
       this.songsController.listSongs
     );
   }

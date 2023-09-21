@@ -26,6 +26,7 @@ export interface Song {
   albums?: Album[];
   artists?: Artist[];
   writers?: Artist[];
+  songPlays?: SongPlay[];
 }
 
 export interface CreateSongPayload {

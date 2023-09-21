@@ -60,8 +60,6 @@ class SongController {
       );
       const albumQuery = this.buildAlbumQueries(albumName, album, year);
 
-      console.log(albumQuery);
-
       const query = {
         where: {
           ...searchParams,
@@ -69,6 +67,7 @@ class SongController {
         ...getPagination(limit, offset),
         ...getOrderOptions([{ sortKey: sortBy, sortOrder: sort }]),
         required: true,
+        distinct: true,
         include: [
           {
             model: AlbumModel,
@@ -93,32 +92,43 @@ class SongController {
         ],
       };
 
-      const rawResp = await this.songService.findAll(query);
+      const rawResp = await this.songService.findAndCountAll(query);
 
       function transformArtist(artist: Artist) {
-        const { songArtists, ...rest } = artist;
+        const { songArtists, ...rest } = omit(artist, [
+          'createdAt',
+          'updatedAt',
+        ]);
         return {
           ...rest,
           isFeatured: songArtists.isFeatured,
           isMainArtist: songArtists.isMainArtist,
         };
       }
-
-      // Define a function to transform an album object
       function transformAlbum(album: Album) {
-        const { albumSongs, ...rest } = album;
+        const { albumSongs, ...rest } = omit(album, ['createdAt', 'updatedAt']);
         return rest;
       }
 
       // Map and transform the rawResp
-      const resp = rawResp.map((song) => ({
+      const resp = rawResp.rows.map((song) => ({
         ...song,
         artists: song.artists.map(transformArtist),
-        writers: song.writers.map((writer) => omit(writer, 'songWriters')),
+        writers: song.writers.map((writer) =>
+          omit(writer, ['songWriters', 'createdAt', 'updatedAt'])
+        ),
         albums: song.albums.map(transformAlbum),
+        songPlays: song.songPlays.map((playData) =>
+          omit(playData, ['createdAt', 'updatedAt'])
+        ),
       }));
 
-      res.status(200).json({ success: true, length: resp.length, data: resp });
+      res.status(200).json({
+        success: true,
+        length: rawResp.count,
+        realLength: resp.length,
+        rows: resp,
+      });
     } catch (error) {
       logger.log({
         level: 'error',
@@ -219,6 +229,39 @@ class SongController {
 
     return { artistQuery, writerQuery };
   }
+
+  public getPopularSongs = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const {
+        limit = 15,
+        artist,
+        writer,
+        album,
+        year,
+        albumName,
+        ...searchValues
+      } = req.query;
+      let sort: any = 'desc';
+      let sortBy: any = 'createdAt';
+      if (req.query) {
+        sort = req.query.sort ? req.query.sort : sort;
+        sortBy = req.query.sortBy ? req.query.sortBy : sortBy;
+      }
+
+      res.status(200).json({ success: true, data: {} });
+    } catch (error) {
+      logger.log({
+        level: 'error',
+        label: 'Songs Controller',
+        message: `Unable to list songs`,
+      });
+      next(error);
+    }
+  };
 }
 
 export default SongController;
