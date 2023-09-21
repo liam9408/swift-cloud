@@ -59,6 +59,10 @@ $ npm run build-docker
 $ npm run watch-docker
 ```
 
+The seed data is done via a pipeline that transforms the raw data into the database.
+
+Once the app has started, invoke the /imports/songs API by sending in the SwiftCloud - Sheet1.csv file to seed the data. The documentation can be found below:
+
 ## API Documentation
 
 https://documenter.getpostman.com/view/17195991/2s9YCASWTe
