@@ -1,4 +1,4 @@
-import { AlbumSong } from 'albumSong.type';
+import { AlbumSong } from './albumSong.type';
 import { Song } from './songs.type';
 
 export interface Album {

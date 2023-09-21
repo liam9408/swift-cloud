@@ -1,9 +1,8 @@
 import { injectable } from 'inversify';
+import { Transaction } from 'sequelize';
 import logger from '../utils/logger';
 import HttpException from '../exceptions/HttpException';
 import SongWriter from '../db/models/songWriter.model';
-
-import { Transaction } from 'sequelize';
 
 @injectable()
 class SongWriterService {

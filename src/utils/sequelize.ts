@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { isNil, omitBy, isNaN } from 'lodash';
-import { Op, fn, col, literal } from 'sequelize';
+import { Op, fn, col } from 'sequelize';
 
 /**
  * Parse sequelize model to create a model spec.

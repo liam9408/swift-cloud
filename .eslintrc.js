@@ -20,6 +20,12 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'jest'],
   rules: {
+    'no-undef': 'off',
+    'no-empty-pattern': 'off',
+    'no-param-reassign': 'off',
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
+    'mport/prefer-default-export': 'off',
     'no-unused-vars': 'off',
     'no-await-in-loop': 'off',
     'no-control-regex': 'off',

@@ -1,6 +1,6 @@
+import { SongArtist } from './songArtist.type';
+import { SongWriter } from './songWriter.type';
 import { Song } from './songs.type';
-import { SongArtist } from 'songArtist.type';
-import { SongWriter } from 'songWriter.type';
 
 export interface Artist {
   id?: number;

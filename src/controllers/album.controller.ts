@@ -2,6 +2,9 @@ import { injectable } from 'inversify';
 import { omit } from 'lodash';
 import { NextFunction, Request, Response } from 'express';
 
+import { Op, WhereOptions } from 'sequelize';
+import { Song } from '../types/songs.type';
+import { Artist } from '../types/artist.type';
 import { SERVICE_IDENTIFIER } from '../constants';
 import iocContainer from '../configs/ioc.config';
 import SongModel from '../db/models/song.model';
@@ -10,10 +13,6 @@ import ArtistModel from '../db/models/artist.model';
 import { getPagination, getOrderOptions } from '../utils/sequelize';
 import { AlbumService } from '../services';
 import logger from '../utils/logger';
-import { Op, WhereOptions } from 'sequelize';
-import { Song } from 'songs.type';
-import { Artist } from 'artist.type';
-import { Album } from 'albums.type';
 
 @injectable()
 class AlbumController {

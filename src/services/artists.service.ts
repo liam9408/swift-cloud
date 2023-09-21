@@ -1,9 +1,9 @@
 import { injectable } from 'inversify';
+import { FindOptions, Transaction } from 'sequelize';
 import logger from '../utils/logger';
 import HttpException from '../exceptions/HttpException';
 import ArtistModel from '../db/models/artist.model';
 import { Artist } from '../types/artist.type';
-import { FindOptions, Transaction } from 'sequelize';
 
 @injectable()
 class ArtistService {

@@ -1,19 +1,15 @@
 import { injectable } from 'inversify';
-import { Op, Sequelize, WhereOptions } from 'sequelize';
-import { NextFunction, Request, Response, raw } from 'express';
+import { Op, WhereOptions } from 'sequelize';
+import { NextFunction, Request, Response } from 'express';
 
+import { omit } from 'lodash';
 import { SERVICE_IDENTIFIER } from '../constants';
 import iocContainer from '../configs/ioc.config';
 
-import AlbumModel from '../db/models/album.model';
-import ArtistModel from '../db/models/artist.model';
 import SongModel from '../db/models/song.model';
-import SongPlayModel from '../db/models/songPlays.model';
 
 import { ArtistService } from '../services';
 import logger from '../utils/logger';
-import { Artist } from 'artist.type';
-import { omit } from 'lodash';
 
 @injectable()
 class ArtistController {

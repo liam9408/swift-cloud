@@ -1,7 +1,12 @@
+// eslint-disable class-methods-use-this
 import { injectable } from 'inversify';
 import { Op, Sequelize, WhereOptions } from 'sequelize';
-import { NextFunction, Request, Response, raw } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { omit } from 'lodash';
 
+import { Artist } from '../types/artist.type';
+import { Album } from '../types/albums.type';
+import { Song } from '../types/songs.type';
 import { SERVICE_IDENTIFIER } from '../constants';
 import iocContainer from '../configs/ioc.config';
 
@@ -18,10 +23,6 @@ import {
 } from '../services';
 import logger from '../utils/logger';
 import { getPagination, getOrderOptions } from '../utils/sequelize';
-import { omit } from 'lodash';
-import { Artist } from 'artist.type';
-import { Album } from 'albums.type';
-import { Song } from 'songs.type';
 
 @injectable()
 class SongController {
@@ -152,7 +153,7 @@ class SongController {
   }
 
   private buildAlbumQueries(albumNames: any, albums: any, years: any) {
-    let where: WhereOptions = {};
+    const where: WhereOptions = {};
 
     if (albums) {
       where.id = String(albums)
@@ -251,8 +252,8 @@ class SongController {
       const { month } = req.params;
       const { limit = 10 } = req.query; // <- default to top 10
 
-      let sort: any = 'desc';
-      let sortBy: any = 'playCount';
+      const sort: any = 'desc';
+      const sortBy: any = 'playCount';
 
       const query = {
         where: {
@@ -306,8 +307,8 @@ class SongController {
     try {
       const { songId } = req.params;
 
-      let sort: any = 'desc';
-      let sortBy: any = 'playCount';
+      const sort: any = 'desc';
+      const sortBy: any = 'playCount';
 
       const query = {
         where: {

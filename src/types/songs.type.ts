@@ -1,4 +1,4 @@
-import { Artist } from 'artist.type';
+import { Artist } from './artist.type';
 import { Album } from './albums.type';
 import { SongPlay } from './songPlay.type';
 

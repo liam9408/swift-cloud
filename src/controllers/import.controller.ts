@@ -1,6 +1,12 @@
 import { injectable } from 'inversify';
 import { NextFunction, Response } from 'express';
+import { groupBy } from 'lodash';
 
+import { Song, SongImport } from '../types/songs.type';
+import { AlbumSong } from '../types/albumSong.type';
+import { SongPlay } from '../types/songPlay.type';
+import { SongWriter } from '../types/songWriter.type';
+import { SongArtist } from '../types/songArtist.type';
 import { SERVICE_IDENTIFIER } from '../constants';
 import iocContainer from '../configs/ioc.config';
 
@@ -15,18 +21,7 @@ import {
 } from '../services';
 import logger from '../utils/logger';
 import SongsParser from '../lib/songs.parser';
-import removeSpecialCharacters from '../utils/removeSpecialCharacters';
 import { RequestWithFile } from '../types/request.type';
-
-import SongsSchema from '../csvSchema/songs.schema';
-import { groupBy } from 'lodash';
-import { Song, SongImport } from 'songs.type';
-import { SONGS } from '../enums';
-import { AlbumSong } from 'albumSong.type';
-import { Album } from 'albums.type';
-import { SongPlay } from 'songPlay.type';
-import { SongWriter } from 'songWriter.type';
-import { SongArtist } from 'songArtist.type';
 
 @injectable()
 class ImportController {
