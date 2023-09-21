@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-conditional-expect */
 import iocTestContainer, {
   setupSequelize,
 } from '../tests/configs/jest.ioc.config';
@@ -134,7 +135,7 @@ describe('Unit Test: Album Service', () => {
 
       const resp = await albumService.batchCreate([album]);
 
-      expect(albumService.albumModel.bulkCreate).toBeCalledTimes(1);
+      expect(albumService.albumModel.bulkCreate).toHaveBeenCalledTimes(1);
       expect(resp).not.toBeNull();
       expect(resp.length).toBeGreaterThanOrEqual(0);
     });

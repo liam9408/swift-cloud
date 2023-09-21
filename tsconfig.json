@@ -28,7 +28,6 @@
     "src/db/tasks",
     "src/db/seeders",
     "src/utils/sequelize",
-    "src/tests",
     "src/serverless"
   ]
 }
