@@ -146,22 +146,19 @@ https://documenter.getpostman.com/view/17195991/2s9YCASWTe
 ├── sequelize.config.js
 ├── package.json
 └── tsconfig.json
+```
 
 ## Commit Message
 
-| When               | Commit Message              |
-| :----------------- | :-------------------------- |
-| Add function       | feat: ⚡️ Add function      |
-| Fix bug            | fix: 🐞 Fix bug             |
+| When               | Commit Message               |
+| :----------------- | :--------------------------- |
+| Add function       | feat: ⚡️ Add function       |
+| Fix bug            | fix: 🐞 Fix bug              |
 | Refactoring        | refactor: 🛠 Refactoring     |
-| Add package        | package: 📦 Add package     |
-| Fix readme         | docs: 📚 Fix readme         |
+| Add package        | package: 📦 Add package      |
+| Fix readme         | docs: 📚 Fix readme          |
 | Tool Setup         | chore: 🛠 Tool/Project setup |
 | Improvements style | style: 👁 Improvements style |
-
-
-### Note
-```
 
 ### To-do
 
