@@ -33,7 +33,7 @@ class Artist extends Model {
 
   public static initAssociation(): void {
     this.belongsToMany(Songs, {
-      as: 'artists',
+      as: 'performers',
       through: SongArtists,
     });
     this.belongsToMany(Songs, {

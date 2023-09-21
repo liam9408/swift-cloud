@@ -9,6 +9,8 @@ export interface Artist {
   updatedAt?: Date;
   writer?: Song[];
   artist?: Song[];
+  writers?: Song[];
+  performers?: Song[];
   songArtists?: SongArtist;
   songWriters?: SongWriter;
 }

@@ -9,9 +9,23 @@ import { FindOptions, Transaction } from 'sequelize';
 class ArtistService {
   public artistModel = ArtistModel;
 
+  public async findOne(query?: FindOptions): Promise<Artist> {
+    try {
+      const resp = await this.artistModel.findOne(query);
+      return resp.toJSON() as Artist;
+    } catch (err) {
+      logger.log({
+        level: 'error',
+        label: 'Artist Service',
+        message: err.stack,
+      });
+      throw new HttpException(500, 30006, err.message);
+    }
+  }
+
   public async findAll(query?: FindOptions): Promise<Artist[]> {
     try {
-      const resp = await this.artistModel.findAll({ ...query });
+      const resp = await this.artistModel.findAll(query);
       return resp.map((row) => row.toJSON() as Artist);
     } catch (err) {
       logger.log({

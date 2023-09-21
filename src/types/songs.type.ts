@@ -24,7 +24,7 @@ export interface Song {
   createdAt?: Date;
   updatedAt?: Date;
   albums?: Album[];
-  artists?: Artist[];
+  performers?: Artist[];
   writers?: Artist[];
   songPlays?: SongPlay[];
 }

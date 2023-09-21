@@ -16,22 +16,22 @@ class DefaultRoute implements Route {
 
   private initializeRoutes() {
     this.router.get(
-      `${this.path}`,
-      // todo: authMiddleware goes here
-      apiLoggerMiddleware('listSongs'),
-      this.songsController.listSongs
-    );
-
-    this.router.get(
       `${this.path}/popular/:month`,
+      // todo: authMiddleware goes here
+      apiLoggerMiddleware('getPopularSongs'),
+      this.songsController.getPopularSongs
+    );
+
+    this.router.get(
+      `${this.path}`,
       apiLoggerMiddleware('listSongs'),
       this.songsController.listSongs
     );
 
     this.router.get(
-      `${this.path}/:id`,
+      `${this.path}/:songId`,
       apiLoggerMiddleware('getSong'),
-      this.songsController.listSongs
+      this.songsController.getSong
     );
   }
 }

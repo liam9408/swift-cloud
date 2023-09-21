@@ -4,7 +4,7 @@ import { AlbumController } from '../controllers';
 import apiLoggerMiddleware from '../middlewares/apiLogger';
 
 class DefaultRoute implements Route {
-  public path = '/api/album';
+  public path = '/api/albums';
 
   public router = Router();
 
@@ -23,9 +23,9 @@ class DefaultRoute implements Route {
     );
 
     this.router.get(
-      `${this.path}/:id`,
-      apiLoggerMiddleware('listAlbums'),
-      this.albumController.listAlbums
+      `${this.path}/:albumId`,
+      apiLoggerMiddleware('getAlbum'),
+      this.albumController.getAlbum
     );
   }
 }

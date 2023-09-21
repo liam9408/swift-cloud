@@ -9,9 +9,9 @@ import { FindOptions, Transaction } from 'sequelize';
 class SongPlayService {
   public songPlays = SongPlays;
 
-  public async findAll(query: FindOptions[]): Promise<SongPlay[]> {
+  public async findAll(query?: FindOptions): Promise<SongPlay[]> {
     try {
-      const resp = await this.songPlays.findAll(...query);
+      const resp = await this.songPlays.findAll(query);
       return resp.map((row) => row.toJSON() as SongPlay);
     } catch (err) {
       logger.log({

@@ -20,6 +20,12 @@ class DefaultRoute implements Route {
       apiLoggerMiddleware('listArtists'),
       this.artistController.listArtists
     );
+
+    this.router.get(
+      `${this.path}/:artistId`,
+      apiLoggerMiddleware('getArtist'),
+      this.artistController.getArtist
+    );
   }
 }
 
