@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Route } from '../types/routes.type';
 import { SongsController } from '../controllers';
+import apiLoggerMiddleware from '../middlewares/apiLogger';
 
 class DefaultRoute implements Route {
   public path = '/api/songs';
@@ -17,6 +18,39 @@ class DefaultRoute implements Route {
     this.router.get(
       `${this.path}`,
       // todo: authMiddleware goes here
+      apiLoggerMiddleware('listSongs'),
+      this.songsController.listSongs
+    );
+
+    this.router.get(`${this.path}`, this.songsController.listSongs);
+
+    this.router.get(
+      `${this.path}/popular/:month`,
+      apiLoggerMiddleware('listSongs'),
+      this.songsController.listSongs
+    );
+
+    this.router.get(
+      `${this.path}/:id`,
+      apiLoggerMiddleware('listSongs'),
+      this.songsController.listSongs
+    );
+
+    this.router.get(
+      `${this.path}/search/artist/:artistName`,
+      apiLoggerMiddleware('listSongs'),
+      this.songsController.listSongs
+    );
+
+    this.router.get(
+      `${this.path}/search`,
+      apiLoggerMiddleware('listSongs'),
+      this.songsController.listSongs
+    );
+
+    this.router.get(
+      `${this.path}/songs/top/:limit`,
+      apiLoggerMiddleware('listSongs'),
       this.songsController.listSongs
     );
   }

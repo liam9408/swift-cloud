@@ -23,9 +23,9 @@ export interface Song {
   name?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  album?: Album;
-  artist?: Artist[];
-  writer?: Artist[];
+  albums?: Album[];
+  artists?: Artist[];
+  writers?: Artist[];
 }
 
 export interface CreateSongPayload {

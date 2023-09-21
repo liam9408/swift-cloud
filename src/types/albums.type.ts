@@ -1,3 +1,4 @@
+import { AlbumSong } from 'albumSong.type';
 import { Song } from './songs.type';
 
 export interface Album {
@@ -7,6 +8,7 @@ export interface Album {
   createdAt?: Date;
   updatedAt?: Date;
   songs?: Song[];
+  albumSongs: AlbumSong[];
 }
 
 export interface CreateAlbumPayload {

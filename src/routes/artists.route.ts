@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Route } from '../types/routes.type';
 import { ArtistController } from '../controllers';
+import apiLoggerMiddleware from '../middlewares/apiLogger';
 
 class DefaultRoute implements Route {
   public path = '/api/artists';
@@ -16,6 +17,7 @@ class DefaultRoute implements Route {
   private initializeRoutes() {
     this.router.get(
       `${this.path}`,
+      apiLoggerMiddleware('listArtists'),
       // todo: auth middleware goes here
       this.artistController.listArtists
     );

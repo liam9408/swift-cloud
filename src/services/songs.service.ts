@@ -11,7 +11,9 @@ class SongService {
 
   public async findAll(query?: FindOptions): Promise<Song[]> {
     try {
-      const resp = await this.songModel.findAll({ ...query });
+      const resp = await this.songModel.findAll({
+        ...query,
+      });
       return resp.map((row) => row.toJSON() as Song);
     } catch (err) {
       logger.log({

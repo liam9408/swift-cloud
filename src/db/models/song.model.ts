@@ -57,11 +57,11 @@ class Song extends Model {
       through: AlbumSongs,
     });
     this.belongsToMany(Artists, {
-      as: 'artist',
+      as: 'artists',
       through: SongArtists,
     });
     this.belongsToMany(Artists, {
-      as: 'writer',
+      as: 'writers',
       through: SongWriters,
     });
   }
