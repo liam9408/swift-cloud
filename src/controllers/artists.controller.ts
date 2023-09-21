@@ -87,7 +87,7 @@ class ArtistController {
       logger.log({
         level: 'error',
         label: 'Artist Controller',
-        message: `Unable to list artists`,
+        message: `Unable to get artist`,
       });
       next(error);
     }

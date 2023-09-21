@@ -69,7 +69,7 @@ class AlbumController {
       logger.log({
         level: 'error',
         label: 'Album Controller',
-        message: `Unable to list songs`,
+        message: `Unable to list albums`,
       });
       next(error);
     }
@@ -156,7 +156,7 @@ class AlbumController {
       logger.log({
         level: 'error',
         label: 'Album Controller',
-        message: `Unable to list album`,
+        message: `Unable to get album`,
       });
       next(error);
     }

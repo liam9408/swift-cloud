@@ -109,7 +109,7 @@ class SongController {
 
       res.status(200).json({
         success: true,
-        length: rawResp.count,
+        count: rawResp.count,
         rows: resp,
       });
     } catch (error) {
@@ -270,7 +270,7 @@ class SongController {
               },
               {
                 model: ArtistModel,
-                as: 'artists',
+                as: 'performers',
               },
               {
                 model: ArtistModel,
@@ -297,7 +297,7 @@ class SongController {
       logger.log({
         level: 'error',
         label: 'Songs Controller',
-        message: `Unable to list songs`,
+        message: `Unable to get popular songs`,
       });
       next(error);
     }
@@ -320,7 +320,7 @@ class SongController {
           },
           {
             model: ArtistModel,
-            as: 'artists',
+            as: 'performers',
           },
           {
             model: ArtistModel,
@@ -340,7 +340,7 @@ class SongController {
       logger.log({
         level: 'error',
         label: 'Songs Controller',
-        message: `Unable to list songs`,
+        message: `Unable to get song`,
       });
       next(error);
     }
