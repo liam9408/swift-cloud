@@ -22,8 +22,6 @@ Backend API server for Swift Cloud.
 - Postgresql 12+
 - Sequelize Cli
 
-## Environment Setup
-
 ### Environment Variable
 
 1. Create a `.env` file based on `.env.template`
@@ -60,6 +58,10 @@ or, start app using Docker
 $ npm run build-docker
 $ npm run watch-docker
 ```
+
+## API Documentation
+
+https://documenter.getpostman.com/view/17195991/2s9YCASWTe
 
 ## Package Scripts
 
