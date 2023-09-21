@@ -45,12 +45,12 @@ class ArtistService {
       const resp = await this.artistModel.bulkCreate(dataToCreate, {
         transaction,
       });
-      return resp.map((row) => row.toJSON() as Artist);
+      return resp;
     } catch (err) {
       logger.log({
         level: 'error',
         label: 'Artist Service',
-        message: err.stack,
+        message: err,
       });
       throw new HttpException(500, 30006, err.message);
     }

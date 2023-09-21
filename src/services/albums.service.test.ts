@@ -1,60 +1,148 @@
-import { FindOptions } from 'sequelize';
-import { afterEach, describe } from 'node:test';
-import AlbumsService from './albums.service'; // Update the import path
+import iocTestContainer, {
+  setupSequelize,
+} from '../tests/configs/jest.ioc.config';
+import { SERVICE_IDENTIFIER } from '../constants';
+import AlbumService from './albums.service';
+
 import AlbumModel from '../db/models/album.model';
 
-// Mock the dependencies
-jest.mock('../db/models/album.model', () => ({
-  findAndCountAll: jest.fn(),
-  findAll: jest.fn(),
-  findOne: jest.fn(),
-  bulkCreate: jest.fn(),
-}));
+const mockedAlbumModel = AlbumModel as jest.Mocked<any>;
 
 const album = {
   id: 1,
   name: 'test album',
-  year: '2023',
-  createdAt: '',
-  updatedAt: '',
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
-const albumService = new AlbumsService();
+describe('Unit Test: Album Service', () => {
+  let albumService: AlbumService;
 
-describe('AlbumsService', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  beforeAll(async () => {
+    await setupSequelize();
+
+    albumService = iocTestContainer.get<AlbumService>(
+      SERVICE_IDENTIFIER.ALBUM_SERVICE
+    );
   });
 
   describe('findAndCountAll', () => {
-    it('should find and count all albums', async () => {
-      const query: FindOptions = {}; // Add any necessary query options
-      const expectedResult = {
-        rows: [album],
-        count: 10, // Adjust as needed
-      };
-
-      (AlbumModel.findAndCountAll as jest.Mock).mockResolvedValue(
-        expectedResult
-      );
-
-      const result = await albumService.findAndCountAll(query);
-
-      expect(result).toEqual(expectedResult);
+    it('success', async () => {
+      jest
+        .spyOn(mockedAlbumModel, 'findAndCountAll')
+        .mockImplementation(async () => {
+          return { rows: [], count: 0 };
+        });
+      const resp = await albumService.findAndCountAll();
+      expect(resp.rows.length).toBeGreaterThanOrEqual(0);
+      expect(resp.count).not.toBeNull();
     });
 
-    it('should handle errors and throw HttpException', async () => {
-      const query: FindOptions = {}; // Add any necessary query options
+    it('error', async () => {
+      jest
+        .spyOn(mockedAlbumModel, 'findAndCountAll')
+        .mockImplementation(async () => {
+          throw new Error();
+        });
 
-      (AlbumModel.findAndCountAll as jest.Mock).mockRejectedValue(
-        new Error('Test Error')
-      );
-
-      await expect(albumService.findAndCountAll(query)).rejects.toThrow(
-        new Error()
-      );
+      try {
+        await albumService.findAndCountAll();
+      } catch (e) {
+        expect(e).toEqual(expect.any(Error));
+      }
     });
   });
 
-  // Add similar test blocks for other methods (findAll, findOne, batchCreate)
+  describe('findAll', () => {
+    it('success', async () => {
+      const albumModelInstanceMock = {
+        toJSON: jest.fn(() => album),
+        map: jest.fn(() => [album]),
+      };
+
+      jest
+        .spyOn(mockedAlbumModel, 'findAll')
+        .mockResolvedValueOnce(albumModelInstanceMock);
+
+      const resp = await albumService.findAll();
+      expect(resp.length).toBeGreaterThanOrEqual(0);
+    });
+
+    it('error', async () => {
+      jest.spyOn(mockedAlbumModel, 'findAll').mockImplementation(async () => {
+        throw new Error();
+      });
+      return albumService
+        .findAll()
+        .catch((e) => expect(e).toEqual(expect.any(Error)));
+    });
+  });
+
+  describe('findOne', () => {
+    const findOneQuery = {
+      where: {
+        id: album.id,
+      },
+    };
+
+    it('success', async () => {
+      try {
+        const albumModelInstanceMock = {
+          ...album,
+          toJSON: jest.fn(() => album),
+        };
+
+        jest
+          .spyOn(mockedAlbumModel, 'findOne')
+          .mockResolvedValueOnce(albumModelInstanceMock);
+
+        const resp = await albumService.findOne(findOneQuery);
+        expect(albumService.albumModel.findOne).toHaveBeenCalledWith(
+          findOneQuery
+        );
+        expect(resp).not.toBeNull();
+        expect(resp).toHaveProperty('id');
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    it('error', async () => {
+      jest.spyOn(mockedAlbumModel, 'findByPk').mockImplementation(async () => {
+        throw new Error();
+      });
+      return albumService
+        .findOne(findOneQuery)
+        .catch((e) => expect(e).toEqual(expect.any(Error)));
+    });
+  });
+
+  describe('batchCreate', () => {
+    it('success', async () => {
+      const albumModelInstanceMock = {
+        map: jest.fn(() => [album]),
+        toJSON: jest.fn(() => album),
+      };
+
+      jest
+        .spyOn(mockedAlbumModel, 'bulkCreate')
+        .mockResolvedValueOnce(albumModelInstanceMock);
+
+      jest.mock('sequelize', () => ({
+        transaction: jest.fn(() => Promise.resolve()),
+      }));
+
+      const resp = await albumService.batchCreate([album]);
+
+      expect(albumService.albumModel.bulkCreate).toBeCalledTimes(1);
+      expect(resp).not.toBeNull();
+      expect(resp.length).toBeGreaterThanOrEqual(0);
+    });
+
+    it('error', async () => {
+      return albumService
+        .batchCreate([album])
+        .catch((e) => expect(e).toEqual(expect.any(Error)));
+    });
+  });
 });

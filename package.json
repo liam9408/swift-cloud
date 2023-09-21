@@ -11,7 +11,7 @@
     "build-docker": "npm run build && docker-compose build",
     "build-ts": "tsc",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
     "watch": "NODE_ENV=local concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\"  \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-docker": "docker-compose up",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",

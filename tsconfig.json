@@ -3,7 +3,7 @@
     // "lib": ["es6"],
     "skipLibCheck": true,
     "target": "es6",
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "reflect-metadata"],
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
