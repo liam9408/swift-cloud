@@ -44,8 +44,6 @@ $ sequelize db:migrate # Migrate database table
 
 Make sure you have completed the environment setup.
 
-Currently there is a compile error from reflect-metadata during `npm build` and `npm build-docker` but the application can be ran nonetheless from the former command.
-
 ```sh
 $ npm install
 $ npm build
@@ -68,6 +66,11 @@ Once the app has started, invoke the /imports/songs API by sending in the [Swift
 ## API Documentation
 
 https://documenter.getpostman.com/view/17195991/2s9YCASWTe
+
+## Deployed App
+
+https://tidal-solstice-399711.as.r.appspot.com
+![swift-cloud-backend-architecture](https://lh3.googleusercontent.com/pw/AIL4fc98pPc-i5RX93ShHxyl9p777omR1P-QHdboOF0pWCQnzYjP6ho9aunS_Noal1eiRbeiemBV7ZB9MYGlhZoxZjEAUXV2VmT6BQfNOev49TXY24VS94vF6opgBY_V5VE44xIHnAEwfFL7u6bMLlATjS4Tm5hB-pFvcWb1V7RkOXUDvdtE86SaLYyGUM3ZXuK2bQf2n5uEb62N5UjljUJcY53_WXDKcvXMXiQPJINnsPYJoqYy6SO6TcXm6wjYUcdCqGfa0nJ1FgaLMMrx_o8qD38_aJTw8Av6ac43v4wW5Js8hadaQsUOob2vfeI5ZJ_TUs3slzuZIiuiFWm0olKXwQ1vXn9kE9EDxhGm51a0LYrraySF8nxk2g77Us0mrS6q8TmfP3JVYSap277t-zO7t1tpESsthslz7wGdrBiQXzcvMwzVKCpxd_7JAfMCN4SI-zKpSKuXziiMlHPkk4IRcScd7fEXgDzwMxgeAk4hz8cNYQskIrnjLa_qZVssZh8_73PC6_QlW4KRsu5dOXBAZCUcw0HSl1z0CO_kv5bpr-axBWv9NKImdr0mKtdmDy63LczIS64BSV4A_IdLcqUD3cEJ9RWx7MFo4eQCQWg3uLcIWEOwqfaGwBqshYejbv97hOJYAkpz9JsBWYJjYmdUi-83awEwa_IKTdQ-abdwhH6QvF83eDQ8etpgcb_2_hWc66F7XKeOUIaN3rxc6_rtFLnKy6FkredFmlc4_T9gwNADhTJI05Aejg7mlvU8d-0-cpezm70xSHzZ9_bTkrNtWDUfrks64tEdWFIcfalUIoNTldFgxk31j3Ck4v__bR_8xFhnpF5pVPVlbog-Z269pDRo84sOZoTwj3GkU_1Gm0xxVvSHvaHt_gzQn9FtFTYcaNG6AXwp6vYPYi1Kj0s-ww95AJeU0b3p9SiagtLeEYNvRV78qA_4Lsqwe98iJz1YGRLqgbNJoTkKulX-ayyr_xLw5R5nyLNO=w878-h435-s-no?authuser=0)
 
 ## Package Scripts
 
@@ -172,6 +175,4 @@ https://documenter.getpostman.com/view/17195991/2s9YCASWTe
 2. add year range query for albums
 3. allow searching songs by artist name
 4. more test coverage
-5. resolve reflect-metadata error
-6. better way to seed data
-7. deploy Google cloud
+5. better way to seed data

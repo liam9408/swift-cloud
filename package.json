@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server.js",
     "clean": "rm -rf ./dist",
     "pre-build": "npm run lint & npm run clean",
     "post-build": "npm run copy-asset",
